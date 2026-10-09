@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -5,404 +6,595 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Häxans Halloween 🎃</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=IM+Fell+English&display=swap');
+
+:root {
+  --gold:#ffb52e;
+  --orange:#ff7015;
+  --night:#070817;
+  --panel:#100b19;
+  --purple:#36205b;
+}
 *{box-sizing:border-box}
-:root{--orange:#ff9b28;--gold:#ffe1a4;--purple:#21142f}
-body{margin:0;background:radial-gradient(ellipse at 70% 15%,#493064,#101027 55%,#070814);color:white;font-family:Georgia,serif;text-align:center;min-height:100vh;overflow-x:hidden}
-button,input{font:inherit}
-button{cursor:pointer}
-.sky{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.moon{position:absolute;right:12%;top:4%;font-size:clamp(75px,13vw,140px);filter:drop-shadow(0 0 30px #ffb74d)}
-.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1.5px);background-size:73px 83px;opacity:.35}
-.witch-flight{position:absolute;left:0;top:15%;width:190px;height:110px;animation:flyby 12s linear infinite;animation-delay:1s}
-.witch-flight svg{width:100%;height:100%;filter:drop-shadow(0 0 12px #c39aff)}
-@keyframes flyby{0%{transform:translate(-230px,30px) rotate(-5deg)}45%{transform:translate(55vw,-25px) rotate(4deg)}90%{transform:translate(calc(100vw + 250px),20px) rotate(-3deg)}100%{transform:translate(calc(100vw + 250px),20px)}}
-.bats{position:absolute;top:32%;left:12%;font-size:28px;animation:bob 4s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-20px)}}
-header,main,footer{position:relative;z-index:1}
-h1{color:var(--orange);text-shadow:0 0 20px #ff6400;font-size:clamp(2rem,6vw,3.5rem);margin:25px 10px 8px}
-.intro{color:var(--gold);margin:15px}
-.card-area{perspective:1200px;width:min(90%,500px);margin:30px auto}
-.closed-card{width:100%;min-height:380px;padding:30px 18px;border:3px solid var(--orange);border-radius:14px;background:linear-gradient(145deg,#32184a,#100b20);box-shadow:0 0 35px #ff790055,0 15px 40px #0008;color:white;transition:transform .4s}
-.closed-card:hover{transform:translateY(-7px) rotate(-1deg)}
-.pumpkin{font-size:100px;filter:drop-shadow(0 0 16px #ff851b)}
-.closed-card h2{font-size:2.4rem;color:var(--orange)}
-.hint{color:var(--gold);animation:pulse 1.4s infinite alternate}
-@keyframes pulse{to{opacity:.55}}
-.action{border:1px solid #ffc66b;border-radius:22px;padding:12px 19px;margin:6px;background:linear-gradient(#ffbd54,#ff8a12);color:#1b1027;font-weight:bold;box-shadow:0 0 12px #ff790033}
-.action:hover{filter:brightness(1.13);transform:translateY(-1px)}
-.open-card{display:none;width:min(96%,1000px);margin:25px auto;padding:clamp(12px,3vw,25px);border:3px solid var(--orange);border-radius:16px;background:#151027ed;box-shadow:0 0 35px #ff790055;animation:appear .7s ease}
-.open-card.show{display:block}
-@keyframes appear{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-.greeting{line-height:1.8;color:#ffe8bd}
-h2,h3{color:#ffae42}
-.game{border-top:1px dashed var(--orange);margin-top:20px;padding-top:15px}
-.panel{border:1px solid #9c5b28;border-radius:12px;background:#0c1025;padding:12px;margin:15px 0}
-.tools{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin:12px 0}
-label{color:var(--gold)}
-canvas{display:block;width:100%;height:320px;background:#fff4db;border:3px solid var(--orange);border-radius:8px;touch-action:none;cursor:crosshair}
-#gameCanvas{height:auto;aspect-ratio:16/7;background:#10132e;touch-action:pan-y}
-.game-hud{display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px;color:var(--gold);font-size:1.05rem}
-.game-controls{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
-footer{padding:25px 10px;color:#c9b7dd}
-#jumpscare{display:none;position:fixed;inset:0;z-index:20;background:radial-gradient(circle,#550018,#080008 65%);align-items:center;justify-content:center;flex-direction:column;cursor:pointer}
-#jumpscare.active{display:flex;animation:flash .13s steps(2) 5}
-@keyframes flash{50%{background:#e50022}}
-.scare-face{font-family:Arial,sans-serif;font-size:clamp(120px,35vw,330px);line-height:1;color:#eee;text-shadow:0 0 25px red,0 0 60px #ff002b;animation:face .25s infinite alternate}
-@keyframes face{from{transform:scale(.85) rotate(-4deg)}to{transform:scale(1.08) rotate(3deg)}}
-.scare-title{font-size:clamp(3rem,12vw,7rem);font-weight:bold;color:#ff092f;text-shadow:0 0 20px red;margin:0}
-#scareContinue{color:white;font-size:1.1rem}
-[hidden]{display:none!important}
-@media(prefers-reduced-motion:reduce){.witch-flight,.bats{animation:none}}
+body{
+  margin:0;color:#ffe8bd;
+  background:#060817;
+  font-family:'IM Fell English',Georgia,serif;
+  min-height:100vh;
+}
+button{font:inherit;cursor:pointer;color:#ffe6ad}
+button:focus-visible{outline:2px solid #fff}
+#sky{
+  position:fixed;inset:0;z-index:-2;overflow:hidden;
+  background:
+   radial-gradient(ellipse at 76% 15%,#44315f 0,transparent 27%),
+   radial-gradient(ellipse at 20% 60%,#17294d 0,transparent 40%),
+   linear-gradient(#080b20,#161027 65%,#080714);
+}
+.moon{
+ position:absolute;right:12%;top:5%;width:100px;height:100px;
+ border-radius:50%;background:#ffe2a1;
+ box-shadow:0 0 20px #ffc66d,0 0 65px #ffb94b77;
+}
+.moon:after{
+ content:"";position:absolute;inset:12px -5px 0 17px;
+ background:#c7a6a1;border-radius:50%;opacity:.22;
+}
+.star{
+ position:absolute;color:#ffdca0;
+ animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{to{opacity:.25;transform:scale(.6)}}
+.bat{
+ position:absolute;font-size:23px;
+ animation:batFly 16s linear infinite;
+}
+@keyframes batFly{
+ from{transform:translate(-10vw,0)}
+ to{transform:translate(110vw,-45px)}
+}
+.tree{
+ position:absolute;bottom:0;width:100%;height:27%;
+ background:linear-gradient(transparent,#090714 80%);
+}
+.flying-witch{
+ position:fixed;top:14%;left:-180px;width:150px;z-index:3;
+ animation:witchFly 18s linear infinite;
+ pointer-events:none;
+ filter:drop-shadow(0 0 9px #ff9c32);
+}
+@keyframes witchFly{
+ 0%{left:-180px;top:17%}
+ 35%{top:9%}
+ 65%{top:16%}
+ 100%{left:110%;top:12%}
+}
+header{text-align:center;padding:24px 12px 12px}
+h1,h2,h3,.fancy{font-family:'Cinzel',Georgia,serif}
+h1{
+ color:var(--gold);font-size:clamp(25px,5vw,46px);
+ text-shadow:0 0 15px #ff7015aa;margin:0 0 8px;
+}
+.subtitle{color:#e9cba0;margin:0}
+main{width:min(1100px,94%);margin:15px auto 45px}
+.panel{
+ position:relative;
+ background:linear-gradient(135deg,#100a17f5,#090c1bf7);
+ border:2px solid #a65b15;
+ outline:1px solid #ffbf48;
+ outline-offset:-7px;
+ box-shadow:0 0 18px #f68a1940,inset 0 0 35px #6e2e1740;
+ padding:clamp(18px,4vw,35px);
+ margin:16px 0;
+}
+.panel:before,.panel:after{
+ content:"✦";position:absolute;color:var(--gold);
+ font-size:22px;top:6px;
+}
+.panel:before{left:10px}.panel:after{right:10px}
+.hidden{display:none!important}
+button,.card-choice{
+ background:linear-gradient(#28152a,#100a17);
+ border:1px solid #dc8b27;
+ box-shadow:inset 0 0 10px #ff9c2720,0 0 9px #ff9c2720;
+ padding:12px 17px;border-radius:4px;
+ transition:.2s;
+}
+button:hover,.card-choice:hover{
+ background:#42223a;box-shadow:0 0 15px #ff981f88;
+ transform:translateY(-2px);
+}
+.primary{background:linear-gradient(#78300f,#29101b);font-size:17px}
+.center{text-align:center}
+.cover{
+ max-width:470px;min-height:460px;margin:35px auto;
+ text-align:center;display:flex;flex-direction:column;
+ justify-content:center;align-items:center;
+ background:
+  radial-gradient(ellipse at center,#35150c 0,#100911 60%,#070711);
+ cursor:pointer;
+}
+.cover .pumpkin{
+ font-size:110px;line-height:1.3;
+ filter:drop-shadow(0 0 18px #ff7a0b);
+}
+.cover h2{color:#ffb52e;font-size:clamp(28px,5vw,42px);margin:8px}
+.cover p{font-size:18px}
+.ornament{color:#ff9b21;letter-spacing:7px;margin:14px}
+.inside-intro{text-align:center;max-width:700px;margin:auto}
+.inside-intro p{line-height:1.7}
+.choice-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:14px;margin-top:22px;
+}
+.card-choice{
+ min-height:155px;text-align:center;display:flex;
+ flex-direction:column;align-items:center;justify-content:center;
+ cursor:pointer;
+}
+.card-choice .emoji{font-size:43px;filter:drop-shadow(0 0 9px #ff851d)}
+.card-choice strong{
+ font-family:'Cinzel',serif;color:#ffb83f;font-size:19px;
+ margin:8px 0 4px;
+}
+.card-choice small{color:#ddc9a6}
+h2{color:#ffb638;text-align:center}
+h3{color:#ffbd48}
+.gamebar{
+ display:flex;justify-content:space-between;align-items:center;
+ flex-wrap:wrap;gap:10px;margin-bottom:13px;
+}
+.stat{
+ border:1px solid #a96724;background:#0b0918;
+ padding:9px 12px;color:#ffd58c;
+}
+#drawCanvas{
+ display:block;width:100%;height:auto;aspect-ratio:1.5;
+ background:
+  radial-gradient(circle at 50% 50%,#1d1740,#080b1c 75%);
+ border:2px solid #c17b2a;touch-action:none;
+ cursor:crosshair;
+}
+.drawing-tools{
+ display:flex;gap:9px;flex-wrap:wrap;align-items:center;
+ margin:13px 0;
+}
+.swatch{
+ width:30px;height:30px;border-radius:50%;
+ border:2px solid #fff8; padding:0;
+}
+.swatch.selected{outline:2px solid #ffb52e;outline-offset:3px}
+input[type=range]{accent-color:#ff8b25}
+#fortuneResult{
+ min-height:48px;text-align:center;padding:13px;color:#ffda92;
+}
+#gameCanvas{
+ display:block;width:100%;height:auto;aspect-ratio:2/1;
+ border:2px solid #bb752a;background:#090b21;
+ image-rendering:pixelated;
+}
+.game-controls{
+ display:flex;gap:12px;justify-content:center;
+ flex-wrap:wrap;margin-top:14px;
+}
+.game-controls button{min-width:64px;font-size:20px}
+.help{text-align:center;color:#cdb99d;font-size:14px;line-height:1.7}
+footer{text-align:center;padding:20px;color:#a99788}
+#scare{
+ position:fixed;inset:0;z-index:99;background:#100000;
+ display:flex;align-items:center;justify-content:center;
+ text-align:center;padding:20px;
+}
+.scare-inner{animation:shake .12s infinite;color:#ff1515}
+.scare-face{font-size:clamp(100px,28vw,250px);line-height:1.1;
+ filter:drop-shadow(0 0 24px red)}
+.scare-title{
+ font:bold italic clamp(45px,12vw,100px) Arial,sans-serif;
+ text-shadow:0 0 12px red,4px 4px #500;
+}
+.scare-sub{color:#ffaaaa;font-size:24px}
+@keyframes shake{
+ 0%{transform:translate(2px,-2px) rotate(-1deg)}
+ 50%{transform:translate(-2px,2px) rotate(1deg)}
+ 100%{transform:translate(1px,1px)}
+}
+@media(max-width:600px){
+ .choice-grid{grid-template-columns:1fr}
+ .card-choice{min-height:110px}
+ .cover{min-height:400px}
+ .moon{width:65px;height:65px}
+ .panel{padding:20px 14px}
+}
 </style>
 </head>
 <body>
-<div class="sky" aria-hidden="true">
-  <div class="stars"></div><div class="moon">🌕</div>
-  <div class="bats">🦇　🦇</div>
-  <div class="witch-flight">
-    <svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#080713" stroke="#080713" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 82 Q66 74 115 88 Q69 87 20 82 M24 78 L12 68 M25 82 L10 91 M25 84 L15 101" stroke="#9b7042" stroke-width="2"/>
-        <path d="M79 49 L59 14 L104 39 L91 44 L112 57 L79 55Z"/>
-        <path d="M73 47 Q88 39 100 50 L119 67 L96 69 L81 60 L64 75 L51 69 L67 54Z"/>
-        <circle cx="87" cy="48" r="9"/>
-        <path d="M76 43 L91 22 L99 41 L111 47 L84 47Z"/>
-        <path d="M81 47 L72 53 L85 54Z" fill="#ffbc62"/>
-        <path d="M76 57 L47 70 L36 66 L60 50Z"/>
-        <path d="M97 60 L124 66 L135 61 L141 64 L129 74 L103 72Z"/>
-        <path d="M69 59 L56 81 L47 83 L60 56Z"/>
-        <path d="M97 67 L111 86 L122 90 L117 94 L101 86 L89 70Z"/>
-        <path d="M114 87 Q147 79 175 84 Q147 90 114 87Z" fill="#c38c42"/>
-        <path d="M175 84 L194 76 L186 86 L200 83 L189 91Z" fill="#c38c42"/>
-      </g>
-      <circle cx="89" cy="49" r="2" fill="#ffca72"/>
-    </svg>
-  </div>
+<div id="sky">
+ <div class="moon"></div>
+ <div class="tree"></div>
+ <span class="star" style="left:9%;top:16%">✦</span>
+ <span class="star" style="left:30%;top:9%">✧</span>
+ <span class="star" style="left:57%;top:22%">✦</span>
+ <span class="star" style="left:84%;top:34%">✧</span>
+ <span class="star" style="left:72%;top:8%">✦</span>
+ <span class="bat" style="top:22%;animation-delay:-5s">🦇</span>
+ <span class="bat" style="top:37%;animation-delay:-12s">🦇</span>
 </div>
 
+<!-- Häxan är ritad som SVG, inte en emoji -->
+<svg class="flying-witch" viewBox="0 0 180 100" aria-label="En häxa som flyger på en kvast">
+ <g fill="#090711" stroke="#ff9c35" stroke-width="1.1">
+  <path d="M10 65 Q45 53 85 65 L155 78 L87 72 Q43 80 10 65Z"/>
+  <path d="M12 65 L0 49 L25 61 L13 42 L37 61 L31 45 L50 64Z"/>
+  <path d="M56 53 L72 34 L91 36 L101 52 L88 64 L68 61Z"/>
+  <path d="M68 36 L63 20 L79 5 L95 12 L102 28 L91 40Z"/>
+  <path d="M56 18 L81 0 L112 18 L78 14Z"/>
+  <path d="M70 34 L52 48 L61 56 L80 43Z"/>
+  <path d="M84 42 L108 51 L104 57 L84 52Z"/>
+  <path d="M72 60 L60 76 L67 79 L84 63Z"/>
+  <path d="M86 60 L94 76 L101 75 L97 59Z"/>
+ </g>
+ <path d="M67 29 Q79 24 91 30" stroke="#ffbd42" fill="none"/>
+ <circle cx="83" cy="27" r="2" fill="#ffb42d"/>
+ <path d="M97 53 Q119 40 133 50" stroke="#ff9c35" fill="none" stroke-width="2"/>
+ <circle cx="143" cy="47" r="2" fill="#ffc24a"/>
+ <circle cx="153" cy="39" r="1.5" fill="#ffc24a"/>
+</svg>
+
 <header>
-  <h1>🎃 Häxans Halloween 🎃</h1>
-  <p class="intro">En magisk överraskning väntar på dig...</p>
+ <h1>✦ Häxans Halloween ✦</h1>
+ <p class="subtitle">En magisk och kuslig liten värld väntar på dig...</p>
 </header>
 
 <main>
-<section class="card-area" id="cardArea">
-  <button class="closed-card" id="openButton" aria-label="Öppna Halloween-kortet">
-    <div class="pumpkin">🎃</div>
-    <h2>Happy Halloween!</h2>
-    <p>Du har fått ett mystiskt kort...</p>
-    <p class="hint">✨ Klicka för att öppna ✨</p>
-    <div style="font-size:40px">🕸️ 👻 🕸️</div>
-  </button>
-</section>
+ <!-- FÖRSTA VYN: STÄNGT KORT -->
+ <section id="cover" class="panel cover" onclick="openCard()">
+  <div style="font-size:48px">🐈‍⬛</div>
+  <div class="ornament">✧ ── ☾ ── ✧</div>
+  <h2>Happy<br>Halloween!</h2>
+  <div class="pumpkin">🎃</div>
+  <p>Du har fått ett mystiskt kort...</p>
+  <div class="ornament">✦ ── 🕸 ── ✦</div>
+  <button class="primary" onclick="event.stopPropagation();openCard()">Klicka för att öppna</button>
+ </section>
 
-<section class="open-card" id="inside">
-  <h2>👻 Buu! Du öppnade kortet! 👻</h2>
-  <div class="greeting">
-    <p>Hej, modiga Halloween-vän! 🎃</p>
-    <p>Häxan har flugit hela vägen genom natten för att önska dig en riktigt kuslig Halloween!</p>
-    <p>Må din kväll vara full av godis, skratt, spöken och magiska äventyr.</p>
+ <!-- MENYN EFTER ATT KORTET ÖPPNATS -->
+ <section id="welcome" class="panel hidden">
+  <div class="inside-intro">
+   <div style="font-size:45px">🎃 ✦ 🦇</div>
+   <h2>Buu! Du öppnade kortet!</h2>
+   <div class="ornament">✧ ───── ☾ ───── ✧</div>
+   <p>Hej, modiga Halloween-vän!</p>
+   <p>Häxan har flugit hela vägen genom natten för att önska dig en riktigt kuslig Halloween. Må din kväll vara full av godis, skratt, spöken och magiska äventyr!</p>
   </div>
+  <div class="choice-grid">
+   <button class="card-choice" onclick="showSection('drawing')">
+    <span class="emoji">🖌️</span><strong>Rita</strong>
+    <small>Skapa något magiskt</small>
+   </button>
+   <button class="card-choice" onclick="startScare()">
+    <span class="emoji">🎃</span><strong>Spela</strong>
+    <small>Samla godis och undvik spöken</small>
+   </button>
+   <button class="card-choice" onclick="tellFortune()">
+    <span class="emoji">📜</span><strong>Spådom</strong>
+    <small>Få en magisk hälsning</small>
+   </button>
+  </div>
+  <div class="center" style="margin-top:22px">
+   <button onclick="showSection('cover');closeCard()">Stäng kortet</button>
+  </div>
+ </section>
 
-  <section class="game panel">
-    <h3>🎨 Häxans magiska ritspel</h3>
-    <p>Rita en pumpa, ett spöke eller något riktigt läskigt!</p>
-    <div class="tools">
-      <label for="color">Färg:</label><input type="color" id="color" value="#6020a0">
-      <label for="size">Pensel:</label><input type="range" id="size" min="2" max="35" value="5">
-      <button class="action" id="drawMode">✏️ Rita</button>
-      <button class="action" id="eraseMode">🧽 Sudd</button>
-      <button class="action" id="clearCanvas">🗑️ Rensa</button>
-    </div>
-    <canvas id="canvas" aria-label="Rityta"></canvas>
-    <p id="status">Dra med musen eller fingret för att rita! ✨</p>
-    <button class="action" id="fortuneButton">🔮 Häxans spådom</button>
-    <p id="fortune" aria-live="polite"></p>
-  </section>
+ <!-- RITVERKTYG -->
+ <section id="drawing" class="panel hidden">
+  <h2>🎃 Häxans magiska ritspel</h2>
+  <p class="center">Rita en pumpa, ett spöke eller något riktigt läskigt!</p>
+  <canvas id="drawCanvas" width="900" height="600"></canvas>
+  <div class="drawing-tools">
+   <strong>Färg:</strong>
+   <button class="swatch selected" style="background:#ff781c" aria-label="Orange" onclick="setColor('#ff781c',this)"></button>
+   <button class="swatch" style="background:#b85cff" aria-label="Lila" onclick="setColor('#b85cff',this)"></button>
+   <button class="swatch" style="background:#f6e5c5" aria-label="Vit" onclick="setColor('#f6e5c5',this)"></button>
+   <button class="swatch" style="background:#44d68c" aria-label="Grön" onclick="setColor('#44d68c',this)"></button>
+   <button class="swatch" style="background:#ff3e57" aria-label="Röd" onclick="setColor('#ff3e57',this)"></button>
+   <label for="brushSize">Pensel:</label>
+   <input id="brushSize" type="range" min="2" max="35" value="7">
+  </div>
+  <div class="drawing-tools">
+   <button onclick="setEraser()">🧽 Sudd</button>
+   <button onclick="clearDrawing()">▤ Rensa</button>
+   <button onclick="drawPumpkin()">🎃 Rita en pumpa</button>
+   <button onclick="downloadDrawing()">Spara bilden</button>
+  </div>
+  <div class="center"><button onclick="showSection('welcome')">← Tillbaka till menyn</button></div>
+ </section>
 
-  <section class="game panel" id="adventure">
-    <h3>🧙 Häxans godisjakt</h3>
-    <p>Samla godis, hoppa över spöken och försök överleva hela natten!</p>
-    <div class="game-hud">
-      <span>🍬 Poäng: <b id="score">0</b></span>
-      <span>❤️ Liv: <b id="lives">3</b></span>
-      <span>⏱️ Tid: <b id="time">45</b>s</span>
-      <span>⭐ Nivå: <b id="level">1</b></span>
-    </div>
-    <canvas id="gameCanvas" width="800" height="350" aria-label="Plattformsspel"></canvas>
-    <p id="gameMessage" aria-live="polite">Tryck på Spela för att börja. Hoppa med mellanslag, ↑ eller knappen Hoppa.</p>
-    <button class="action" id="playButton">🎃 Spela</button>
-    <div class="game-controls">
-      <button class="action" id="leftButton">⬅️ Vänster</button>
-      <button class="action" id="jumpButton">⬆️ Hoppa</button>
-      <button class="action" id="rightButton">➡️ Höger</button>
-    </div>
-  </section>
-  <button class="action" id="closeButton">💌 Stäng kortet</button>
-</section>
+ <!-- SPÅDOM -->
+ <section id="fortune" class="panel hidden">
+  <h2>🔮 Häxans spådom</h2>
+  <div class="center" style="font-size:70px">🔮</div>
+  <div id="fortuneResult">Vågar du höra vad kristallkulan säger?</div>
+  <div class="center"><button class="primary" onclick="tellFortune()">Avslöja min spådom</button></div>
+  <div class="center" style="margin-top:20px"><button onclick="showSection('welcome')">← Tillbaka till menyn</button></div>
+ </section>
+
+ <!-- GODISJAKT -->
+ <section id="game" class="panel hidden">
+  <div class="gamebar">
+   <div class="stat">🎃 Poäng: <b id="score">0</b></div>
+   <div class="stat">❤️ Liv: <b id="lives">3</b></div>
+   <div class="stat">⏱ Tid: <b id="time">45</b>s</div>
+   <div class="stat">✦ Nivå <b id="level">1</b></div>
+  </div>
+  <h2>Häxans godisjakt</h2>
+  <p class="center">Samla godis, hoppa över spöken och försök överleva hela natten!</p>
+  <canvas id="gameCanvas" width="900" height="450"></canvas>
+  <div class="game-controls">
+   <button aria-label="Gå vänster" onpointerdown="keys.left=true" onpointerup="keys.left=false" onpointerleave="keys.left=false" ontouchend="keys.left=false">◀</button>
+   <button aria-label="Gå höger" onpointerdown="keys.right=true" onpointerup="keys.right=false" onpointerleave="keys.right=false" ontouchend="keys.right=false">▶</button>
+   <button aria-label="Hoppa" onclick="jump()">⬆ Hoppa</button>
+   <button onclick="pauseGame()" id="pauseButton">Ⅱ Paus</button>
+   <button onclick="startScare()">↻ Spela igen</button>
+  </div>
+  <p class="help">Dator: använd ← → eller A/D för att springa och mellanslag för att hoppa.<br>Mobil: använd knapparna ovan.</p>
+  <div class="center"><button onclick="stopGame();showSection('welcome')">← Tillbaka till menyn</button></div>
+ </section>
 </main>
-<footer>Skapad med lite magi och massor av Halloween-känsla 🦇</footer>
 
-<div id="jumpscare" role="dialog" aria-label="Jumpscare" aria-modal="true">
-  <div class="scare-face">☠</div>
-  <p class="scare-title">BUUU!</p>
-  <p id="scareContinue">Du blev skrämd! 👻</p>
-</div>
+<footer>✦ Glad Halloween ✦ Akta dig för spökena... ✦</footer>
+
+<!-- JUMPSCARE -->
+<section id="scare" class="hidden" aria-live="assertive">
+ <div class="scare-inner">
+  <div class="scare-face">👹</div>
+  <div class="scare-title">BUUU!</div>
+  <p class="scare-sub">DU BLEV SKRÄMD...</p>
+ </div>
+</section>
 
 <script>
-const $ = id => document.getElementById(id);
-const openButton=$("openButton"), inside=$("inside");
-openButton.addEventListener("click",()=>{
-  openButton.parentElement.hidden=true;
-  inside.classList.add("show");
-  setupCanvas();
-  window.scrollTo({top:0,behavior:"smooth"});
-});
-$("closeButton").addEventListener("click",()=>{
-  inside.classList.remove("show");
-  $("cardArea").hidden=false;
-  window.scrollTo({top:0,behavior:"smooth"});
-});
+const $=id=>document.getElementById(id);
 
-// Ritspel: koordinater i CSS-pixlar och korrekt skalning på högupplösta skärmar.
-const canvas=$("canvas"),ctx=canvas.getContext("2d");
-let drawing=false,erasing=false,canvasReady=false,lastPoint=null;
-function setupCanvas(){
-  const rect=canvas.getBoundingClientRect();
-  if(!rect.width)return;
-  const ratio=Math.max(1,window.devicePixelRatio||1);
-  let saved=null;
-  if(canvasReady){
-    saved=document.createElement("canvas");
-    saved.width=canvas.width;saved.height=canvas.height;
-    saved.getContext("2d").drawImage(canvas,0,0);
-  }
-  canvas.width=Math.round(rect.width*ratio);
-  canvas.height=Math.round(rect.height*ratio);
-  ctx.setTransform(ratio,0,0,ratio,0,0);
-  ctx.lineCap="round";ctx.lineJoin="round";
-  if(saved)ctx.drawImage(saved,0,0,saved.width,saved.height,0,0,rect.width,rect.height);
-  canvasReady=true;
+function openCard(){
+ $('cover').classList.add('hidden');
+ $('welcome').classList.remove('hidden');
 }
-function point(e){
-  const r=canvas.getBoundingClientRect();
-  return {x:(e.clientX-r.left)*canvas.clientWidth/r.width,
-          y:(e.clientY-r.top)*canvas.clientHeight/r.height};
+function closeCard(){
+ $('cover').classList.remove('hidden');
+ $('welcome').classList.add('hidden');
 }
-function paintSegment(a,b){
-  ctx.save();
-  ctx.globalCompositeOperation=erasing?"destination-out":"source-over";
-  ctx.strokeStyle=$("color").value;
-  ctx.lineWidth=Number($("size").value);
-  ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-  ctx.restore();
+function showSection(id){
+ ['cover','welcome','drawing','fortune','game'].forEach(s=>$(s).classList.add('hidden'));
+ $(id).classList.remove('hidden');
+ if(id!=='game') stopGame();
+ if(id==='drawing') resizeDrawCanvas();
+ window.scrollTo({top:0,behavior:'smooth'});
 }
-canvas.addEventListener("pointerdown",e=>{
-  if(e.button!==undefined&&e.button!==0)return;
-  e.preventDefault();drawing=true;canvas.setPointerCapture(e.pointerId);
-  lastPoint=point(e);paintSegment(lastPoint,{x:lastPoint.x+.01,y:lastPoint.y+.01});
-});
-canvas.addEventListener("pointermove",e=>{
-  if(!drawing)return;e.preventDefault();
-  const p=point(e);
-  // Mellanpunkter ger jämnare streck när musen rör sig snabbt.
-  if(lastPoint){
-    const mid={x:(lastPoint.x+p.x)/2,y:(lastPoint.y+p.y)/2};
-    paintSegment(lastPoint,mid);paintSegment(mid,p);
-  }
-  lastPoint=p;
-});
-function stopDraw(){drawing=false;lastPoint=null}
-canvas.addEventListener("pointerup",stopDraw);
-canvas.addEventListener("pointercancel",stopDraw);
-canvas.addEventListener("lostpointercapture",stopDraw);
-$("drawMode").onclick=()=>{erasing=false;$("status").textContent="Ritläge: skapa något magiskt! ✨"};
-$("eraseMode").onclick=()=>{erasing=true;$("status").textContent="Sudd-läge: gnugga bort det du vill ändra!"};
-$("clearCanvas").onclick=()=>{
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  $("fortune").textContent="";$("status").textContent="Ritytan är tom. Börja skapa igen! 🎨";
-};
+
+/* SPÅDOM */
 const fortunes=[
-"🔮 Du kommer att hitta en magisk godisskatt!",
-"👻 Ett snällt spöke vakar över dig i natt!",
-"🦇 Häxan spår en kväll full av skratt!",
-"🎃 Din Halloween blir kusligt fantastisk!",
-"✨ Magi väntar runt nästa hörn!"
+ "En oväntad godisöverraskning väntar på dig! 🍬",
+ "Ett vänligt spöke kommer att visa dig vägen. 👻",
+ "Månen har valt dig till nattens pumpakung! 🎃",
+ "Någon har gömt en skatt där skuggorna dansar. 💎",
+ "Din Halloween blir full av skratt och magi! ✨",
+ "Akta dig... någon tänker busa med dig! 🦇"
 ];
-$("fortuneButton").onclick=()=>{$("fortune").textContent=fortunes[Math.floor(Math.random()*fortunes.length)]};
-window.addEventListener("resize",()=>{if(inside.classList.contains("show"))setupCanvas()});
-
-// Ljud skapas med Web Audio först efter användarens klick.
-let audio=null;
-function soundContext(){
-  const AC=window.AudioContext||window.webkitAudioContext;
-  if(!AC)return null;
-  if(!audio)audio=new AC();
-  if(audio.state==="suspended")audio.resume();
-  return audio;
-}
-function tone(freq,duration,type="sine",volume=.08,delay=0){
-  const a=soundContext();if(!a)return;
-  const osc=a.createOscillator(),gain=a.createGain(),t=a.currentTime+delay;
-  osc.type=type;osc.frequency.setValueAtTime(freq,t);
-  gain.gain.setValueAtTime(.001,t);
-  gain.gain.exponentialRampToValueAtTime(volume,t+.02);
-  gain.gain.exponentialRampToValueAtTime(.001,t+duration);
-  osc.connect(gain);gain.connect(a.destination);
-  osc.start(t);osc.stop(t+duration+.03);
-}
-function scareSound(){
-  // Egen syntetisk skräckstöt; ingen extern ljudfil behövs.
-  tone(95,.9,"sawtooth",.18);
-  tone(740,.45,"square",.07,.02);
-  tone(1100,.35,"sawtooth",.05,.04);
-  tone(58,1.1,"triangle",.16,.12);
+function tellFortune(){
+ $('fortuneResult').textContent=fortunes[Math.floor(Math.random()*fortunes.length)];
+ showSection('fortune');
 }
 
-// Plattformsspel
-const gc=$("gameCanvas"),g=gc.getContext("2d");
-let running=false,started=false,score=0,lives=3,seconds=45,level=1;
-let player,items,ghosts,keys={},lastTime=0,spawn=0,gameLoop=null,scareTimer=null;
-const floor=290;
+/* RITA */
+const dc=$('drawCanvas'), dctx=dc.getContext('2d');
+let color='#ff781c', drawing=false, lastPoint=null, erasing=false;
+function resizeDrawCanvas(){
+ // Canvasen har en fast intern upplösning, så koordinaterna blir skarpa.
+}
+function setColor(c,button){
+ color=c;erasing=false;
+ document.querySelectorAll('.swatch').forEach(b=>b.classList.remove('selected'));
+ button.classList.add('selected');
+}
+function setEraser(){erasing=true}
+function drawPoint(e){
+ const rect=dc.getBoundingClientRect();
+ return {x:(e.clientX-rect.left)*dc.width/rect.width,
+         y:(e.clientY-rect.top)*dc.height/rect.height};
+}
+dc.addEventListener('pointerdown',e=>{
+ drawing=true;dc.setPointerCapture(e.pointerId);
+ lastPoint=drawPoint(e);
+ dctx.beginPath();dctx.arc(lastPoint.x,lastPoint.y,$('brushSize').value/2,0,Math.PI*2);
+ dctx.fillStyle=erasing?'#0b0b20':color;dctx.fill();
+});
+dc.addEventListener('pointermove',e=>{
+ if(!drawing)return;
+ const p=drawPoint(e);
+ dctx.beginPath();dctx.moveTo(lastPoint.x,lastPoint.y);dctx.lineTo(p.x,p.y);
+ dctx.lineWidth=$('brushSize').value;dctx.lineCap='round';dctx.lineJoin='round';
+ dctx.strokeStyle=erasing?'#0b0b20':color;
+ dctx.shadowBlur=erasing?0:8;dctx.shadowColor=color;dctx.stroke();
+ dctx.shadowBlur=0;lastPoint=p;
+});
+function stopDrawing(){drawing=false;lastPoint=null}
+dc.addEventListener('pointerup',stopDrawing);
+dc.addEventListener('pointercancel',stopDrawing);
+dc.addEventListener('lostpointercapture',stopDrawing);
+function clearDrawing(){dctx.clearRect(0,0,dc.width,dc.height)}
+function drawPumpkin(){
+ const g=dctx;
+ g.save();g.strokeStyle='#ff781c';g.lineWidth=8;g.lineJoin='round';
+ g.shadowColor='#ff781c';g.shadowBlur=14;
+ g.beginPath();g.moveTo(450,230);
+ g.bezierCurveTo(410,170,340,190,310,270);
+ g.bezierCurveTo(260,370,345,440,450,425);
+ g.bezierCurveTo(555,440,640,370,590,270);
+ g.bezierCurveTo(560,190,490,170,450,230);g.stroke();
+ g.beginPath();g.moveTo(450,230);g.quadraticCurveTo(425,190,448,155);
+ g.quadraticCurveTo(478,150,478,205);g.stroke();
+ g.beginPath();g.moveTo(365,285);g.lineTo(405,330);g.lineTo(420,280);g.closePath();
+ g.moveTo(485,280);g.lineTo(500,330);g.lineTo(535,285);g.closePath();
+ g.moveTo(360,365);g.quadraticCurveTo(450,420,540,365);
+ g.lineTo(520,385);g.lineTo(500,370);g.lineTo(480,390);g.lineTo(460,374);
+ g.lineTo(440,390);g.lineTo(420,374);g.lineTo(400,385);g.closePath();g.stroke();
+ g.restore();
+}
+function downloadDrawing(){
+ const a=document.createElement('a');a.download='min-halloweenbild.png';
+ a.href=dc.toDataURL('image/png');a.click();
+}
+
+/* SPEL */
+const gc=$('gameCanvas'), ctx=gc.getContext('2d');
+const keys={left:false,right:false};
+let player, candies, ghosts, score=0, lives=3, seconds=45;
+let gameRunning=false,paused=false,raf=0,timer=0,lastTime=0;
 function resetGame(){
-  score=0;lives=3;seconds=45;level=1;spawn=0;
-  player={x:65,y:floor-36,w:28,h:36,vy:0,onGround:true,invuln:0};
-  items=[];ghosts=[];
-  for(let i=0;i<5;i++)items.push({x:220+i*140,y:floor-28-Math.random()*80,r:11});
-  $("score").textContent=score;$("lives").textContent=lives;
-  $("time").textContent=seconds;$("level").textContent=level;
+ player={x:95,y:330,w:38,h:50,vx:0,vy:0,grounded:false};
+ candies=[];ghosts=[];score=0;lives=3;seconds=45;
+ for(let i=0;i<9;i++) candies.push({x:190+i*90,y:200+Math.random()*150,taken:false});
+ for(let i=0;i<4;i++) ghosts.push({x:270+i*175,y:355,w:38,h:40,dir:i%2?1:-1});
+ updateStats();
 }
-function drawScene(){
-  const grad=g.createLinearGradient(0,0,0,350);
-  grad.addColorStop(0,"#10152f");grad.addColorStop(1,"#302047");
-  g.fillStyle=grad;g.fillRect(0,0,800,350);
-  g.fillStyle="#ffe0a0";g.beginPath();g.arc(680,62,34,0,Math.PI*2);g.fill();
-  g.fillStyle="#10152f";g.beginPath();g.arc(694,51,32,0,Math.PI*2);g.fill();
-  for(let i=0;i<11;i++){
-    const x=i*86;
-    g.fillStyle=i%2?"#151b31":"#1b1935";
-    g.beginPath();g.moveTo(x,floor);g.lineTo(x+40,150+(i%4)*20);g.lineTo(x+80,floor);g.fill();
-  }
-  g.fillStyle="#40315a";g.fillRect(0,floor,800,60);
-  g.fillStyle="#8e633b";
-  for(let x=0;x<800;x+=35)g.fillRect(x,floor+7,24,5);
-  // Små gravstenar och lyktor
-  for(let x=80;x<800;x+=180){
-    g.fillStyle="#5b5770";g.beginPath();g.roundRect(x,floor-27,22,27,7);g.fill();
-    g.fillStyle="#ffad36";g.fillRect(x+7,floor-18,4,8);
-  }
-  items.forEach(o=>{
-    g.font="23px serif";g.textAlign="center";g.fillText("🍬",o.x,o.y+8);
-  });
-  ghosts.forEach(o=>{
-    g.font="30px serif";g.fillText("👻",o.x,o.y+10);
-  });
-  if(player){
-    g.font="32px serif";g.textAlign="center";
-    g.fillText(player.invuln>0&&Math.floor(player.invuln*12)%2?"":"🧙",player.x+player.w/2,player.y+player.h);
-  }
+function updateStats(){
+ $('score').textContent=score;$('lives').textContent=lives;$('time').textContent=seconds;
+ $('level').textContent=Math.max(1,Math.floor(score/50)+1);
 }
-function updateHud(){
-  $("score").textContent=score;$("lives").textContent=lives;
-  $("time").textContent=Math.max(0,Math.ceil(seconds));$("level").textContent=level;
+function startScare(){
+ stopGame();
+ $('scare').classList.remove('hidden');
+ playScareSound();
+ setTimeout(()=>{
+  $('scare').classList.add('hidden');
+  showSection('game');
+  resetGame();gameRunning=true;paused=false;
+  lastTime=performance.now();timer=0;raf=requestAnimationFrame(loop);
+ },2200);
+}
+function playScareSound(){
+ try{
+  const AudioCtx=window.AudioContext||window.webkitAudioContext;
+  if(!AudioCtx)return;
+  const ac=new AudioCtx(),o=ac.createOscillator(),gain=ac.createGain();
+  o.type='sawtooth';o.frequency.setValueAtTime(150,ac.currentTime);
+  o.frequency.exponentialRampToValueAtTime(48,ac.currentTime+.7);
+  gain.gain.setValueAtTime(.18,ac.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,ac.currentTime+1);
+  o.connect(gain);gain.connect(ac.destination);o.start();o.stop(ac.currentTime+1);
+ }catch(e){}
 }
 function jump(){
-  if(running&&player.onGround){player.vy=-480;player.onGround=false;tone(400,.08,"sine",.035)}
+ if(gameRunning&&!paused&&player&&player.grounded){player.vy=-590;player.grounded=false}
 }
-function finishGame(message){
-  running=false;started=false;
-  $("gameMessage").textContent=message+" Slutpoäng: "+score+" 🍬 Tryck på Spela för en ny omgång.";
-  $("playButton").textContent="🔁 Spela igen";
-  if(gameLoop)cancelAnimationFrame(gameLoop);
+function pauseGame(){
+ if(!gameRunning)return;
+ paused=!paused;$('pauseButton').textContent=paused?'▶ Fortsätt':'Ⅱ Paus';
+ if(!paused){lastTime=performance.now();raf=requestAnimationFrame(loop)}
 }
-function frame(now){
-  if(!running)return;
-  const dt=Math.min(.035,(now-lastTime)/1000||.016);lastTime=now;
-  seconds-=dt;
-  if(seconds<=0){seconds=0;updateHud();drawScene();finishGame("Tiden är ute!");return}
-  level=1+Math.floor(score/60);
-  player.vy+=1000*dt;player.y+=player.vy*dt;
-  if(player.y+player.h>=floor){player.y=floor-player.h;player.vy=0;player.onGround=true}
-  const speed=230+level*18;
-  if(keys.ArrowLeft||keys.a)player.x-=speed*dt;
-  if(keys.ArrowRight||keys.d)player.x+=speed*dt;
-  player.x=Math.max(0,Math.min(800-player.w,player.x));
-  player.invuln=Math.max(0,player.invuln-dt);
-  spawn+=dt;
-  if(spawn>Math.max(.65,1.5-level*.12)){
-    spawn=0;
-    ghosts.push({x:820,y:floor-35-Math.random()*95,r:19,speed:110+level*23});
-    if(Math.random()>.35)items.push({x:820,y:floor-25-Math.random()*95,r:12});
-  }
-  ghosts.forEach(o=>o.x-=o.speed*dt);
-  items.forEach(o=>o.x-=speed*.7*dt);
-  ghosts=ghosts.filter(o=>o.x>-40);
-  items=items.filter(o=>o.x>-30);
-  for(let i=items.length-1;i>=0;i--){
-    const o=items[i];
-    if(Math.abs(o.x-(player.x+player.w/2))<24&&Math.abs(o.y-(player.y+player.h/2))<28){
-      items.splice(i,1);score+=10;tone(720,.08,"sine",.05);tone(980,.1,"sine",.04,.08);
-    }
-  }
-  for(const o of ghosts){
-    if(player.invuln<=0&&Math.abs(o.x-(player.x+player.w/2))<27&&Math.abs(o.y-(player.y+player.h/2))<30){
-      lives--;player.invuln=1.5;tone(130,.2,"sawtooth",.09);
-      if(lives<=0){updateHud();drawScene();finishGame("Å nej! Spökena tog alla dina liv!");return}
-    }
-  }
-  updateHud();drawScene();
-  gameLoop=requestAnimationFrame(frame);
-}
-function startActualGame(){
-  if(gameLoop)cancelAnimationFrame(gameLoop);
-  resetGame();running=true;started=true;
-  $("playButton").textContent="🎃 Spela om";
-  $("gameMessage").textContent="Samla godis och undvik spöken! ⬅️ ➡️ och mellanslag för att hoppa.";
-  lastTime=performance.now();gameLoop=requestAnimationFrame(frame);
-}
-function beginScare(){
-  if(running)return;
-  soundContext();
-  $("playButton").disabled=true;
-  const scare=$("jumpscare");
-  scare.classList.add("active");scare.setAttribute("aria-hidden","false");
-  $("scareContinue").textContent="Du blev skrämd... 👻";
-  scareSound();
-  clearTimeout(scareTimer);
-  scareTimer=setTimeout(()=>{
-    scare.classList.remove("active");
-    scare.style.display="none";
-    scare.setAttribute("aria-hidden","true");
-    $("playButton").disabled=false;
-    $("scareContinue").textContent="Du blev skrämd! 👻";
-    startActualGame();
-  },2300);
-  scare.style.display="flex";
-}
-$("playButton").addEventListener("click",()=>{
-  if(started&&!running){beginScare();return}
-  if(!running)beginScare();
+window.addEventListener('keydown',e=>{
+ if(['ArrowLeft','ArrowRight',' ','a','d','A','D'].includes(e.key))e.preventDefault();
+ if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')keys.left=true;
+ if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')keys.right=true;
+ if(e.key===' '||e.key==='ArrowUp')jump();
 });
-$("jumpscare").addEventListener("click",()=>{
-  // Jumpscaren går inte att hoppa över; spelet startar efter den korta effekten.
+window.addEventListener('keyup',e=>{
+ if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')keys.left=false;
+ if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')keys.right=false;
 });
-window.addEventListener("keydown",e=>{
-  if(["ArrowLeft","ArrowRight","ArrowUp"," "].includes(e.key))e.preventDefault();
-  keys[e.key]=true;
-  if(e.key===" "||e.key==="ArrowUp")jump();
-});
-window.addEventListener("keyup",e=>{keys[e.key]=false});
-function holdButton(id,key){
-  const b=$(id);
-  const on=e=>{e.preventDefault();keys[key]=true};
-  const off=e=>{e.preventDefault();keys[key]=false};
-  b.addEventListener("pointerdown",on);
-  ["pointerup","pointercancel","pointerleave"].forEach(ev=>b.addEventListener(ev,off));
+function stopGame(){
+ gameRunning=false;paused=false;
+ if(raf)cancelAnimationFrame(raf);
+ clearInterval(timer);
+ keys.left=false;keys.right=false;
 }
-holdButton("leftButton","ArrowLeft");
-holdButton("rightButton","ArrowRight");
-$("jumpButton").addEventListener("pointerdown",e=>{e.preventDefault();jump()});
-resetGame();drawScene();
+function endGame(message){
+ stopGame();
+ ctx.fillStyle='#070817';ctx.fillRect(0,0,gc.width,gc.height);
+ ctx.textAlign='center';ctx.fillStyle='#ffb52e';
+ ctx.font='bold 44px Georgia';ctx.fillText(message,gc.width/2,190);
+ ctx.font='26px Georgia';ctx.fillStyle='#ffe7b0';
+ ctx.fillText('Poäng: '+score,gc.width/2,245);
+ ctx.font='19px Georgia';ctx.fillText('Tryck på Spela igen för en ny runda',gc.width/2,290);
+}
+function loop(now){
+ if(!gameRunning||paused)return;
+ const dt=Math.min((now-lastTime)/1000,.035);lastTime=now;
+ timer+=dt;
+ if(timer>=1){seconds--;timer=0;updateStats()}
+ if(seconds<=0){endGame('Tiden är ute!');return}
+ const speed=260;
+ player.vx=keys.left?-speed:keys.right?speed:0;
+ player.x=Math.max(0,Math.min(gc.width-player.w,player.x+player.vx*dt));
+ player.vy+=1250*dt;player.y+=player.vy*dt;
+ const floor=gc.height-55;
+ if(player.y+player.h>=floor){player.y=floor-player.h;player.vy=0;player.grounded=true}
+ for(const c of candies){
+  if(!c.taken&&player.x<c.x+17&&player.x+player.w>c.x-17&&player.y<c.y+17&&player.y+player.h>c.y-17){
+   c.taken=true;score+=10;updateStats();
+  }
+ }
+ for(const g of ghosts){
+  g.x+=g.dir*(65+score*.3)*dt;
+  if(g.x<100||g.x>gc.width-60)g.dir*=-1;
+  if(!g.hitCooldown&&player.x<g.x+g.w&&player.x+player.w>g.x&&player.y<g.y+g.h&&player.y+player.h>g.y){
+   lives--;g.hitCooldown=true;updateStats();
+   player.vy=-280;player.vx=player.x<g.x?-170:170;
+   setTimeout(()=>g.hitCooldown=false,1200);
+   if(lives<=0){endGame('Spökena vann!');return}
+  }
+ }
+ drawGame();
+ raf=requestAnimationFrame(loop);
+}
+function drawGame(){
+ const w=gc.width,h=gc.height;
+ const sky=ctx.createLinearGradient(0,0,0,h);
+ sky.addColorStop(0,'#101735');sky.addColorStop(1,'#342044');
+ ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+ // Måne
+ ctx.shadowColor='#ffd68a';ctx.shadowBlur=30;
+ ctx.fillStyle='#ffe3aa';ctx.beginPath();ctx.arc(735,75,43,0,Math.PI*2);ctx.fill();
+ ctx.shadowBlur=0;
+ // Slott
+ ctx.fillStyle='#0a0a20';
+ ctx.beginPath();ctx.moveTo(640,220);ctx.lineTo(640,130);ctx.lineTo(660,150);ctx.lineTo(660,110);ctx.lineTo(685,145);ctx.lineTo(685,95);ctx.lineTo(712,140);ctx.lineTo(712,220);ctx.fill();
+ for(let i=0;i<6;i++){ctx.fillStyle='#ffb546';ctx.fillRect(654+i%3*20,165+Math.floor(i/3)*24,6,10)}
+ // Bats
+ ctx.fillStyle='#050713';
+ for(let i=0;i<4;i++){let x=(i*220+performance.now()*.025)%w,y=55+(i%3)*32;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+12,y-7);ctx.lineTo(x+23,y);ctx.lineTo(x+35,y-7);ctx.lineTo(x+31,y+8);ctx.lineTo(x+18,y+3);ctx.lineTo(x+4,y+8);ctx.fill()}
+ // Mark och plattformar
+ ctx.fillStyle='#17132a';ctx.fillRect(0,h-55,w,55);
+ ctx.fillStyle='#463052';ctx.fillRect(0,h-55,w,8);
+ for(let i=0;i<w;i+=36){ctx.strokeStyle='#594064';ctx.strokeRect(i,h-45,34,28)}
+ // Godis
+ for(const c of candies)if(!c.taken){
+  ctx.shadowColor='#ff6ac7';ctx.shadowBlur=12;
+  ctx.fillStyle='#ff4bba';ctx.beginPath();ctx.arc(c.x,c.y,11,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff0d0';ctx.fillRect(c.x-3,c.y-5,6,10);ctx.shadowBlur=0;
+ }
+ // Spöken
+ for(const g of ghosts){
+  ctx.fillStyle='#dff7ff';ctx.shadowColor='#8bdfff';ctx.shadowBlur=10;
+  ctx.beginPath();ctx.arc(g.x+19,g.y+14,17,Math.PI,0);
+  ctx.lineTo(g.x+36,g.y+34);ctx.lineTo(g.x+28,g.y+29);ctx.lineTo(g.x+20,g.y+36);
+  ctx.lineTo(g.x+11,g.y+29);ctx.lineTo(g.x+2,g.y+34);ctx.closePath();ctx.fill();
+  ctx.shadowBlur=0;ctx.fillStyle='#11132b';
+  ctx.beginPath();ctx.arc(g.x+13,g.y+13,3,0,Math.PI*2);ctx.arc(g.x+25,g.y+13,3,0,Math.PI*2);ctx.fill();
+ }
+ // Spelare: häxa med hatt, hår, klänning och kvast
+ ctx.save();ctx.translate(player.x+player.w/2,player.y+player.h/2);
+ if(player.vx<0)ctx.scale(-1,1);
+ ctx.strokeStyle='#a36a32';ctx.lineWidth=3;
+ ctx.beginPath();ctx.moveTo(-12,17);ctx.lineTo(26,25);ctx.lineTo(39,20);ctx.stroke();
+ ctx.fillStyle='#ffb84c';ctx.beginPath();ctx.arc(0,-9,12,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#38203b';ctx.beginPath();ctx.moveTo(-13,-14);ctx.lineTo(0,-38);ctx.lineTo(14,-14);ctx.closePath();ctx.fill();
+ ctx.beginPath();ctx.ellipse(0,-14,21,4,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#e6b34f';ctx.fillRect(-5,-9,3,3);ctx.fillRect(4,-9,3,3);
+ ctx.fillStyle='#4a235c';ctx.beginPath();ctx.moveTo(-10,3);ctx.lineTo(11,3);ctx.lineTo(18,22);ctx.lineTo(-16,22);ctx.closePath();ctx.fill();
+ ctx.strokeStyle='#ffb52e';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-5,22);ctx.lineTo(-8,28);ctx.moveTo(7,22);ctx.lineTo(10,28);ctx.stroke();
+ ctx.restore();
+}
 </script>
 </body>
 </html>

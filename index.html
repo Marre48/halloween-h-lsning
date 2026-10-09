@@ -4,207 +4,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Häxans Halloween-kort 🎃</title>
-
+<title>Häxans Halloween 🎃</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Georgia, serif;
-  color: white;
-  text-align: center;
-  background:
-    radial-gradient(ellipse at 70% 15%, #6c438d 0%, transparent 30%),
-    radial-gradient(ellipse at 50% 100%, #31174c, #080b20 70%);
-  overflow-x: hidden;
-}
-
-.sky {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.moon {
-  position: absolute;
-  right: 12%;
-  top: 6%;
-  font-size: clamp(80px, 15vw, 160px);
-  filter: drop-shadow(0 0 35px #ffbd55);
-  animation: glow 3s infinite alternate;
-}
-
-.witch {
-  position: absolute;
-  top: 13%;
-  left: -200px;
-  font-size: clamp(65px, 10vw, 100px);
-  animation: fly 18s linear infinite;
-}
-
-.bats {
-  position: absolute;
-  top: 30%;
-  left: 10%;
-  font-size: 30px;
-  animation: float 4s infinite ease-in-out;
-}
-
-@keyframes fly {
-  from { transform: translateX(-200px) translateY(0); }
-  to { transform: translateX(calc(100vw + 300px)) translateY(-70px); }
-}
-
-@keyframes glow {
-  from { opacity: .7; }
-  to { opacity: 1; }
-}
-
-@keyframes float {
-  50% { transform: translateY(-25px) rotate(10deg); }
-}
-
-h1 {
-  color: #ff9d20;
-  text-shadow: 0 0 20px #ff6400;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  margin-bottom: 10px;
-}
-
-.intro {
-  margin: 25px 12px;
-  color: #ffe0a3;
-}
-
-.card-area {
-  perspective: 1200px;
-  width: min(90%, 520px);
-  margin: 35px auto;
-}
-
-.closed-card {
-  cursor: pointer;
-  width: 100%;
-  min-height: 350px;
-  padding: 35px 20px;
-  border: 3px solid #ff9b28;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #32184a, #100b20);
-  box-shadow: 0 0 30px #ff790055, 0 15px 40px #0008;
-  transition: transform .5s, box-shadow .5s;
-  color: white;
-}
-
-.closed-card:hover {
-  transform: translateY(-8px) rotate(-1deg);
-  box-shadow: 0 0 45px #ff790099;
-}
-
-.closed-card .pumpkin {
-  font-size: 105px;
-  margin: 18px 0;
-}
-
-.closed-card h2 {
-  color: #ff9b28;
-  font-size: 2.5rem;
-}
-
-.hint {
-  color: #ffe1a4;
-  animation: glow 1.5s infinite alternate;
-}
-
-button, input {
-  font: inherit;
-}
-
-.action {
-  border: 0;
-  border-radius: 22px;
-  padding: 12px 18px;
-  margin: 6px;
-  cursor: pointer;
-  background: #ff9b28;
-  color: #1b1027;
-  font-weight: bold;
-}
-
-.action:hover { background: #ffd27e; }
-
-.open-card {
-  display: none;
-  text-align: center;
-  width: min(94%, 720px);
-  margin: 30px auto;
-  padding: 22px;
-  border: 3px solid #ff9b28;
-  border-radius: 14px;
-  background: #21142ff5;
-  box-shadow: 0 0 35px #ff790055;
-  animation: appear .8s ease;
-}
-
-.open-card.show { display: block; }
-
-@keyframes appear {
-  from { opacity: 0; transform: scale(.85) rotateY(-12deg); }
-  to { opacity: 1; transform: scale(1) rotateY(0); }
-}
-
-.greeting {
-  padding: 10px;
-  line-height: 1.8;
-  color: #ffe8bd;
-}
-
-h2, h3 { color: #ffae42; }
-
-.game {
-  border-top: 1px dashed #ff9b28;
-  margin-top: 20px;
-  padding-top: 15px;
-}
-
-.tools {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin: 12px 0;
-}
-
-canvas {
-  display: block;
-  width: 100%;
-  height: 320px;
-  background: #fff4db;
-  border: 4px solid #ff9b28;
-  border-radius: 8px;
-  touch-action: none;
-  cursor: crosshair;
-}
-
-label { color: #ffe8bd; }
-
-footer {
-  color: #c9b7dd;
-  padding: 25px 10px;
-  font-size: .9rem;
-}
+*{box-sizing:border-box}
+:root{--orange:#ff9b28;--gold:#ffe1a4;--purple:#21142f}
+body{margin:0;background:radial-gradient(ellipse at 70% 15%,#493064,#101027 55%,#070814);color:white;font-family:Georgia,serif;text-align:center;min-height:100vh;overflow-x:hidden}
+button,input{font:inherit}
+button{cursor:pointer}
+.sky{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.moon{position:absolute;right:12%;top:4%;font-size:clamp(75px,13vw,140px);filter:drop-shadow(0 0 30px #ffb74d)}
+.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1.5px);background-size:73px 83px;opacity:.35}
+.witch-flight{position:absolute;left:0;top:15%;width:190px;height:110px;animation:flyby 12s linear infinite;animation-delay:1s}
+.witch-flight svg{width:100%;height:100%;filter:drop-shadow(0 0 12px #c39aff)}
+@keyframes flyby{0%{transform:translate(-230px,30px) rotate(-5deg)}45%{transform:translate(55vw,-25px) rotate(4deg)}90%{transform:translate(calc(100vw + 250px),20px) rotate(-3deg)}100%{transform:translate(calc(100vw + 250px),20px)}}
+.bats{position:absolute;top:32%;left:12%;font-size:28px;animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-20px)}}
+header,main,footer{position:relative;z-index:1}
+h1{color:var(--orange);text-shadow:0 0 20px #ff6400;font-size:clamp(2rem,6vw,3.5rem);margin:25px 10px 8px}
+.intro{color:var(--gold);margin:15px}
+.card-area{perspective:1200px;width:min(90%,500px);margin:30px auto}
+.closed-card{width:100%;min-height:380px;padding:30px 18px;border:3px solid var(--orange);border-radius:14px;background:linear-gradient(145deg,#32184a,#100b20);box-shadow:0 0 35px #ff790055,0 15px 40px #0008;color:white;transition:transform .4s}
+.closed-card:hover{transform:translateY(-7px) rotate(-1deg)}
+.pumpkin{font-size:100px;filter:drop-shadow(0 0 16px #ff851b)}
+.closed-card h2{font-size:2.4rem;color:var(--orange)}
+.hint{color:var(--gold);animation:pulse 1.4s infinite alternate}
+@keyframes pulse{to{opacity:.55}}
+.action{border:1px solid #ffc66b;border-radius:22px;padding:12px 19px;margin:6px;background:linear-gradient(#ffbd54,#ff8a12);color:#1b1027;font-weight:bold;box-shadow:0 0 12px #ff790033}
+.action:hover{filter:brightness(1.13);transform:translateY(-1px)}
+.open-card{display:none;width:min(96%,1000px);margin:25px auto;padding:clamp(12px,3vw,25px);border:3px solid var(--orange);border-radius:16px;background:#151027ed;box-shadow:0 0 35px #ff790055;animation:appear .7s ease}
+.open-card.show{display:block}
+@keyframes appear{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.greeting{line-height:1.8;color:#ffe8bd}
+h2,h3{color:#ffae42}
+.game{border-top:1px dashed var(--orange);margin-top:20px;padding-top:15px}
+.panel{border:1px solid #9c5b28;border-radius:12px;background:#0c1025;padding:12px;margin:15px 0}
+.tools{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin:12px 0}
+label{color:var(--gold)}
+canvas{display:block;width:100%;height:320px;background:#fff4db;border:3px solid var(--orange);border-radius:8px;touch-action:none;cursor:crosshair}
+#gameCanvas{height:auto;aspect-ratio:16/7;background:#10132e;touch-action:pan-y}
+.game-hud{display:flex;justify-content:space-around;flex-wrap:wrap;gap:10px;color:var(--gold);font-size:1.05rem}
+.game-controls{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+footer{padding:25px 10px;color:#c9b7dd}
+#jumpscare{display:none;position:fixed;inset:0;z-index:20;background:radial-gradient(circle,#550018,#080008 65%);align-items:center;justify-content:center;flex-direction:column;cursor:pointer}
+#jumpscare.active{display:flex;animation:flash .13s steps(2) 5}
+@keyframes flash{50%{background:#e50022}}
+.scare-face{font-family:Arial,sans-serif;font-size:clamp(120px,35vw,330px);line-height:1;color:#eee;text-shadow:0 0 25px red,0 0 60px #ff002b;animation:face .25s infinite alternate}
+@keyframes face{from{transform:scale(.85) rotate(-4deg)}to{transform:scale(1.08) rotate(3deg)}}
+.scare-title{font-size:clamp(3rem,12vw,7rem);font-weight:bold;color:#ff092f;text-shadow:0 0 20px red;margin:0}
+#scareContinue{color:white;font-size:1.1rem}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){.witch-flight,.bats{animation:none}}
 </style>
 </head>
-
 <body>
 <div class="sky" aria-hidden="true">
-  <div class="moon">🌕</div>
-  <div class="witch">🧙🏻‍♀️🧹</div>
+  <div class="stars"></div><div class="moon">🌕</div>
   <div class="bats">🦇　🦇</div>
+  <div class="witch-flight">
+    <svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#080713" stroke="#080713" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 82 Q66 74 115 88 Q69 87 20 82 M24 78 L12 68 M25 82 L10 91 M25 84 L15 101" stroke="#9b7042" stroke-width="2"/>
+        <path d="M79 49 L59 14 L104 39 L91 44 L112 57 L79 55Z"/>
+        <path d="M73 47 Q88 39 100 50 L119 67 L96 69 L81 60 L64 75 L51 69 L67 54Z"/>
+        <circle cx="87" cy="48" r="9"/>
+        <path d="M76 43 L91 22 L99 41 L111 47 L84 47Z"/>
+        <path d="M81 47 L72 53 L85 54Z" fill="#ffbc62"/>
+        <path d="M76 57 L47 70 L36 66 L60 50Z"/>
+        <path d="M97 60 L124 66 L135 61 L141 64 L129 74 L103 72Z"/>
+        <path d="M69 59 L56 81 L47 83 L60 56Z"/>
+        <path d="M97 67 L111 86 L122 90 L117 94 L101 86 L89 70Z"/>
+        <path d="M114 87 Q147 79 175 84 Q147 90 114 87Z" fill="#c38c42"/>
+        <path d="M175 84 L194 76 L186 86 L200 83 L189 91Z" fill="#c38c42"/>
+      </g>
+      <circle cx="89" cy="49" r="2" fill="#ffca72"/>
+    </svg>
+  </div>
 </div>
 
 <header>
@@ -213,187 +87,323 @@ footer {
 </header>
 
 <main>
-  <section class="card-area">
-    <button class="closed-card" id="openButton"
-      onclick="openCard()"
-      aria-label="Öppna Halloween-kortet">
-      <div class="pumpkin">🎃</div>
-      <h2>Happy Halloween!</h2>
-      <p>Du har fått ett mystiskt kort...</p>
-      <p class="hint">✨ Klicka för att öppna ✨</p>
-      <div style="font-size:40px">🕸️ 👻 🕸️</div>
-    </button>
-  </section>
+<section class="card-area" id="cardArea">
+  <button class="closed-card" id="openButton" aria-label="Öppna Halloween-kortet">
+    <div class="pumpkin">🎃</div>
+    <h2>Happy Halloween!</h2>
+    <p>Du har fått ett mystiskt kort...</p>
+    <p class="hint">✨ Klicka för att öppna ✨</p>
+    <div style="font-size:40px">🕸️ 👻 🕸️</div>
+  </button>
+</section>
 
-  <section class="open-card" id="inside">
-    <h2>👻 Buu! Du öppnade kortet! 👻</h2>
+<section class="open-card" id="inside">
+  <h2>👻 Buu! Du öppnade kortet! 👻</h2>
+  <div class="greeting">
+    <p>Hej, modiga Halloween-vän! 🎃</p>
+    <p>Häxan har flugit hela vägen genom natten för att önska dig en riktigt kuslig Halloween!</p>
+    <p>Må din kväll vara full av godis, skratt, spöken och magiska äventyr.</p>
+  </div>
 
-    <div class="greeting">
-      <p>Hej, modiga Halloween-vän! 🎃</p>
-      <p>
-        Häxan har flugit hela vägen genom natten
-        för att önska dig en riktigt kuslig Halloween!
-      </p>
-      <p>
-        Må din kväll vara full av godis, skratt,
-        spöken och magiska äventyr.
-      </p>
-      <p><strong>Vågar du prova häxans ritutmaning?</strong> 🧙‍♀️</p>
+  <section class="game panel">
+    <h3>🎨 Häxans magiska ritspel</h3>
+    <p>Rita en pumpa, ett spöke eller något riktigt läskigt!</p>
+    <div class="tools">
+      <label for="color">Färg:</label><input type="color" id="color" value="#6020a0">
+      <label for="size">Pensel:</label><input type="range" id="size" min="2" max="35" value="5">
+      <button class="action" id="drawMode">✏️ Rita</button>
+      <button class="action" id="eraseMode">🧽 Sudd</button>
+      <button class="action" id="clearCanvas">🗑️ Rensa</button>
     </div>
-
-    <section class="game">
-      <h3>🎨 Häxans magiska ritspel</h3>
-      <p>Rita ett spöke, en pumpa eller något riktigt läskigt!</p>
-
-      <div class="tools">
-        <label for="color">Färg:</label>
-        <input type="color" id="color" value="#6020a0"
-          aria-label="Välj ritfärg">
-
-        <label for="size">Pensel:</label>
-        <input type="range" id="size" min="2" max="24" value="5"
-          aria-label="Välj penselstorlek">
-
-        <button class="action" onclick="setEraser(false)">
-          ✏️ Rita
-        </button>
-        <button class="action" onclick="setEraser(true)">
-          🧽 Sudd
-        </button>
-        <button class="action" onclick="clearCanvas()">
-          🗑️ Rensa
-        </button>
-      </div>
-
-      <canvas id="canvas" aria-label="Rityta"></canvas>
-      <p id="status">Dra med fingret eller musen för att rita! ✨</p>
-      <button class="action" onclick="surprise()">🔮 Häxans spådom</button>
-      <p id="fortune" aria-live="polite"></p>
-    </section>
-
-    <button class="action" onclick="closeCard()">
-      💌 Stäng kortet
-    </button>
+    <canvas id="canvas" aria-label="Rityta"></canvas>
+    <p id="status">Dra med musen eller fingret för att rita! ✨</p>
+    <button class="action" id="fortuneButton">🔮 Häxans spådom</button>
+    <p id="fortune" aria-live="polite"></p>
   </section>
-</main>
 
+  <section class="game panel" id="adventure">
+    <h3>🧙 Häxans godisjakt</h3>
+    <p>Samla godis, hoppa över spöken och försök överleva hela natten!</p>
+    <div class="game-hud">
+      <span>🍬 Poäng: <b id="score">0</b></span>
+      <span>❤️ Liv: <b id="lives">3</b></span>
+      <span>⏱️ Tid: <b id="time">45</b>s</span>
+      <span>⭐ Nivå: <b id="level">1</b></span>
+    </div>
+    <canvas id="gameCanvas" width="800" height="350" aria-label="Plattformsspel"></canvas>
+    <p id="gameMessage" aria-live="polite">Tryck på Spela för att börja. Hoppa med mellanslag, ↑ eller knappen Hoppa.</p>
+    <button class="action" id="playButton">🎃 Spela</button>
+    <div class="game-controls">
+      <button class="action" id="leftButton">⬅️ Vänster</button>
+      <button class="action" id="jumpButton">⬆️ Hoppa</button>
+      <button class="action" id="rightButton">➡️ Höger</button>
+    </div>
+  </section>
+  <button class="action" id="closeButton">💌 Stäng kortet</button>
+</section>
+</main>
 <footer>Skapad med lite magi och massor av Halloween-känsla 🦇</footer>
 
+<div id="jumpscare" role="dialog" aria-label="Jumpscare" aria-modal="true">
+  <div class="scare-face">☠</div>
+  <p class="scare-title">BUUU!</p>
+  <p id="scareContinue">Du blev skrämd! 👻</p>
+</div>
+
 <script>
-function openCard() {
-  document.getElementById("openButton").style.display = "none";
-  document.getElementById("inside").classList.add("show");
+const $ = id => document.getElementById(id);
+const openButton=$("openButton"), inside=$("inside");
+openButton.addEventListener("click",()=>{
+  openButton.parentElement.hidden=true;
+  inside.classList.add("show");
   setupCanvas();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+$("closeButton").addEventListener("click",()=>{
+  inside.classList.remove("show");
+  $("cardArea").hidden=false;
+  window.scrollTo({top:0,behavior:"smooth"});
+});
 
-function closeCard() {
-  document.getElementById("inside").classList.remove("show");
-  document.getElementById("openButton").style.display = "block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let drawing = false;
-let erasing = false;
-let ready = false;
-
-function setupCanvas() {
-  const rect = canvas.getBoundingClientRect();
-  if (rect.width === 0) return;
-
-  const old = document.createElement("canvas");
-  old.width = canvas.width;
-  old.height = canvas.height;
-  old.getContext("2d").drawImage(canvas, 0, 0);
-
-  const hadDrawing = ready && canvas.width > 0;
-  const ratio = window.devicePixelRatio || 1;
-
-  canvas.width = rect.width * ratio;
-  canvas.height = rect.height * ratio;
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-
-  if (hadDrawing) {
-    ctx.drawImage(old, 0, 0, old.width, old.height,
-      0, 0, rect.width, rect.height);
+// Ritspel: koordinater i CSS-pixlar och korrekt skalning på högupplösta skärmar.
+const canvas=$("canvas"),ctx=canvas.getContext("2d");
+let drawing=false,erasing=false,canvasReady=false,lastPoint=null;
+function setupCanvas(){
+  const rect=canvas.getBoundingClientRect();
+  if(!rect.width)return;
+  const ratio=Math.max(1,window.devicePixelRatio||1);
+  let saved=null;
+  if(canvasReady){
+    saved=document.createElement("canvas");
+    saved.width=canvas.width;saved.height=canvas.height;
+    saved.getContext("2d").drawImage(canvas,0,0);
   }
-  ready = true;
+  canvas.width=Math.round(rect.width*ratio);
+  canvas.height=Math.round(rect.height*ratio);
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.lineCap="round";ctx.lineJoin="round";
+  if(saved)ctx.drawImage(saved,0,0,saved.width,saved.height,0,0,rect.width,rect.height);
+  canvasReady=true;
 }
-
-function position(e) {
-  const r = canvas.getBoundingClientRect();
-  return { x: e.clientX - r.left, y: e.clientY - r.top };
+function point(e){
+  const r=canvas.getBoundingClientRect();
+  return {x:(e.clientX-r.left)*canvas.clientWidth/r.width,
+          y:(e.clientY-r.top)*canvas.clientHeight/r.height};
 }
-
-canvas.addEventListener("pointerdown", e => {
-  drawing = true;
-  canvas.setPointerCapture(e.pointerId);
-  const p = position(e);
-  ctx.beginPath();
-  ctx.moveTo(p.x, p.y);
-  ctx.lineTo(p.x + 0.1, p.y + 0.1);
-  paint();
+function paintSegment(a,b){
+  ctx.save();
+  ctx.globalCompositeOperation=erasing?"destination-out":"source-over";
+  ctx.strokeStyle=$("color").value;
+  ctx.lineWidth=Number($("size").value);
+  ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+  ctx.restore();
+}
+canvas.addEventListener("pointerdown",e=>{
+  if(e.button!==undefined&&e.button!==0)return;
+  e.preventDefault();drawing=true;canvas.setPointerCapture(e.pointerId);
+  lastPoint=point(e);paintSegment(lastPoint,{x:lastPoint.x+.01,y:lastPoint.y+.01});
 });
-
-canvas.addEventListener("pointermove", e => {
-  if (!drawing) return;
-  const p = position(e);
-  ctx.lineTo(p.x, p.y);
-  paint();
+canvas.addEventListener("pointermove",e=>{
+  if(!drawing)return;e.preventDefault();
+  const p=point(e);
+  // Mellanpunkter ger jämnare streck när musen rör sig snabbt.
+  if(lastPoint){
+    const mid={x:(lastPoint.x+p.x)/2,y:(lastPoint.y+p.y)/2};
+    paintSegment(lastPoint,mid);paintSegment(mid,p);
+  }
+  lastPoint=p;
 });
-
-function paint() {
-  ctx.strokeStyle = erasing ? "#fff4db" :
-    document.getElementById("color").value;
-  ctx.lineWidth = Number(document.getElementById("size").value);
-  ctx.stroke();
-}
-
-function stopDrawing() {
-  drawing = false;
-  ctx.beginPath();
-}
-
-canvas.addEventListener("pointerup", stopDrawing);
-canvas.addEventListener("pointercancel", stopDrawing);
-canvas.addEventListener("lostpointercapture", stopDrawing);
-
-function setEraser(value) {
-  erasing = value;
-  document.getElementById("status").textContent =
-    value ? "Sudd-läge: gnugga bort det du vill ändra!" :
-    "Ritläge: skapa något magiskt!";
-}
-
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  document.getElementById("fortune").textContent = "";
-  document.getElementById("status").textContent =
-    "Ritytan är tom. Börja skapa igen! 🎨";
-}
-
-const fortunes = [
-  "🔮 Du kommer att hitta en magisk godisskatt!",
-  "👻 Ett snällt spöke vakar över dig i natt!",
-  "🦇 Häxan spår en kväll full av skratt!",
-  "🎃 Din Halloween blir kusligt fantastisk!",
-  "✨ Magi väntar runt nästa hörn!"
+function stopDraw(){drawing=false;lastPoint=null}
+canvas.addEventListener("pointerup",stopDraw);
+canvas.addEventListener("pointercancel",stopDraw);
+canvas.addEventListener("lostpointercapture",stopDraw);
+$("drawMode").onclick=()=>{erasing=false;$("status").textContent="Ritläge: skapa något magiskt! ✨"};
+$("eraseMode").onclick=()=>{erasing=true;$("status").textContent="Sudd-läge: gnugga bort det du vill ändra!"};
+$("clearCanvas").onclick=()=>{
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  $("fortune").textContent="";$("status").textContent="Ritytan är tom. Börja skapa igen! 🎨";
+};
+const fortunes=[
+"🔮 Du kommer att hitta en magisk godisskatt!",
+"👻 Ett snällt spöke vakar över dig i natt!",
+"🦇 Häxan spår en kväll full av skratt!",
+"🎃 Din Halloween blir kusligt fantastisk!",
+"✨ Magi väntar runt nästa hörn!"
 ];
+$("fortuneButton").onclick=()=>{$("fortune").textContent=fortunes[Math.floor(Math.random()*fortunes.length)]};
+window.addEventListener("resize",()=>{if(inside.classList.contains("show"))setupCanvas()});
 
-function surprise() {
-  const i = Math.floor(Math.random() * fortunes.length);
-  document.getElementById("fortune").textContent = fortunes[i];
+// Ljud skapas med Web Audio först efter användarens klick.
+let audio=null;
+function soundContext(){
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return null;
+  if(!audio)audio=new AC();
+  if(audio.state==="suspended")audio.resume();
+  return audio;
+}
+function tone(freq,duration,type="sine",volume=.08,delay=0){
+  const a=soundContext();if(!a)return;
+  const osc=a.createOscillator(),gain=a.createGain(),t=a.currentTime+delay;
+  osc.type=type;osc.frequency.setValueAtTime(freq,t);
+  gain.gain.setValueAtTime(.001,t);
+  gain.gain.exponentialRampToValueAtTime(volume,t+.02);
+  gain.gain.exponentialRampToValueAtTime(.001,t+duration);
+  osc.connect(gain);gain.connect(a.destination);
+  osc.start(t);osc.stop(t+duration+.03);
+}
+function scareSound(){
+  // Egen syntetisk skräckstöt; ingen extern ljudfil behövs.
+  tone(95,.9,"sawtooth",.18);
+  tone(740,.45,"square",.07,.02);
+  tone(1100,.35,"sawtooth",.05,.04);
+  tone(58,1.1,"triangle",.16,.12);
 }
 
-window.addEventListener("resize", () => {
-  if (document.getElementById("inside").classList.contains("show")) {
-    setupCanvas();
+// Plattformsspel
+const gc=$("gameCanvas"),g=gc.getContext("2d");
+let running=false,started=false,score=0,lives=3,seconds=45,level=1;
+let player,items,ghosts,keys={},lastTime=0,spawn=0,gameLoop=null,scareTimer=null;
+const floor=290;
+function resetGame(){
+  score=0;lives=3;seconds=45;level=1;spawn=0;
+  player={x:65,y:floor-36,w:28,h:36,vy:0,onGround:true,invuln:0};
+  items=[];ghosts=[];
+  for(let i=0;i<5;i++)items.push({x:220+i*140,y:floor-28-Math.random()*80,r:11});
+  $("score").textContent=score;$("lives").textContent=lives;
+  $("time").textContent=seconds;$("level").textContent=level;
+}
+function drawScene(){
+  const grad=g.createLinearGradient(0,0,0,350);
+  grad.addColorStop(0,"#10152f");grad.addColorStop(1,"#302047");
+  g.fillStyle=grad;g.fillRect(0,0,800,350);
+  g.fillStyle="#ffe0a0";g.beginPath();g.arc(680,62,34,0,Math.PI*2);g.fill();
+  g.fillStyle="#10152f";g.beginPath();g.arc(694,51,32,0,Math.PI*2);g.fill();
+  for(let i=0;i<11;i++){
+    const x=i*86;
+    g.fillStyle=i%2?"#151b31":"#1b1935";
+    g.beginPath();g.moveTo(x,floor);g.lineTo(x+40,150+(i%4)*20);g.lineTo(x+80,floor);g.fill();
   }
+  g.fillStyle="#40315a";g.fillRect(0,floor,800,60);
+  g.fillStyle="#8e633b";
+  for(let x=0;x<800;x+=35)g.fillRect(x,floor+7,24,5);
+  // Små gravstenar och lyktor
+  for(let x=80;x<800;x+=180){
+    g.fillStyle="#5b5770";g.beginPath();g.roundRect(x,floor-27,22,27,7);g.fill();
+    g.fillStyle="#ffad36";g.fillRect(x+7,floor-18,4,8);
+  }
+  items.forEach(o=>{
+    g.font="23px serif";g.textAlign="center";g.fillText("🍬",o.x,o.y+8);
+  });
+  ghosts.forEach(o=>{
+    g.font="30px serif";g.fillText("👻",o.x,o.y+10);
+  });
+  if(player){
+    g.font="32px serif";g.textAlign="center";
+    g.fillText(player.invuln>0&&Math.floor(player.invuln*12)%2?"":"🧙",player.x+player.w/2,player.y+player.h);
+  }
+}
+function updateHud(){
+  $("score").textContent=score;$("lives").textContent=lives;
+  $("time").textContent=Math.max(0,Math.ceil(seconds));$("level").textContent=level;
+}
+function jump(){
+  if(running&&player.onGround){player.vy=-480;player.onGround=false;tone(400,.08,"sine",.035)}
+}
+function finishGame(message){
+  running=false;started=false;
+  $("gameMessage").textContent=message+" Slutpoäng: "+score+" 🍬 Tryck på Spela för en ny omgång.";
+  $("playButton").textContent="🔁 Spela igen";
+  if(gameLoop)cancelAnimationFrame(gameLoop);
+}
+function frame(now){
+  if(!running)return;
+  const dt=Math.min(.035,(now-lastTime)/1000||.016);lastTime=now;
+  seconds-=dt;
+  if(seconds<=0){seconds=0;updateHud();drawScene();finishGame("Tiden är ute!");return}
+  level=1+Math.floor(score/60);
+  player.vy+=1000*dt;player.y+=player.vy*dt;
+  if(player.y+player.h>=floor){player.y=floor-player.h;player.vy=0;player.onGround=true}
+  const speed=230+level*18;
+  if(keys.ArrowLeft||keys.a)player.x-=speed*dt;
+  if(keys.ArrowRight||keys.d)player.x+=speed*dt;
+  player.x=Math.max(0,Math.min(800-player.w,player.x));
+  player.invuln=Math.max(0,player.invuln-dt);
+  spawn+=dt;
+  if(spawn>Math.max(.65,1.5-level*.12)){
+    spawn=0;
+    ghosts.push({x:820,y:floor-35-Math.random()*95,r:19,speed:110+level*23});
+    if(Math.random()>.35)items.push({x:820,y:floor-25-Math.random()*95,r:12});
+  }
+  ghosts.forEach(o=>o.x-=o.speed*dt);
+  items.forEach(o=>o.x-=speed*.7*dt);
+  ghosts=ghosts.filter(o=>o.x>-40);
+  items=items.filter(o=>o.x>-30);
+  for(let i=items.length-1;i>=0;i--){
+    const o=items[i];
+    if(Math.abs(o.x-(player.x+player.w/2))<24&&Math.abs(o.y-(player.y+player.h/2))<28){
+      items.splice(i,1);score+=10;tone(720,.08,"sine",.05);tone(980,.1,"sine",.04,.08);
+    }
+  }
+  for(const o of ghosts){
+    if(player.invuln<=0&&Math.abs(o.x-(player.x+player.w/2))<27&&Math.abs(o.y-(player.y+player.h/2))<30){
+      lives--;player.invuln=1.5;tone(130,.2,"sawtooth",.09);
+      if(lives<=0){updateHud();drawScene();finishGame("Å nej! Spökena tog alla dina liv!");return}
+    }
+  }
+  updateHud();drawScene();
+  gameLoop=requestAnimationFrame(frame);
+}
+function startActualGame(){
+  if(gameLoop)cancelAnimationFrame(gameLoop);
+  resetGame();running=true;started=true;
+  $("playButton").textContent="🎃 Spela om";
+  $("gameMessage").textContent="Samla godis och undvik spöken! ⬅️ ➡️ och mellanslag för att hoppa.";
+  lastTime=performance.now();gameLoop=requestAnimationFrame(frame);
+}
+function beginScare(){
+  if(running)return;
+  soundContext();
+  $("playButton").disabled=true;
+  const scare=$("jumpscare");
+  scare.classList.add("active");scare.setAttribute("aria-hidden","false");
+  $("scareContinue").textContent="Du blev skrämd... 👻";
+  scareSound();
+  clearTimeout(scareTimer);
+  scareTimer=setTimeout(()=>{
+    scare.classList.remove("active");
+    scare.style.display="none";
+    scare.setAttribute("aria-hidden","true");
+    $("playButton").disabled=false;
+    $("scareContinue").textContent="Du blev skrämd! 👻";
+    startActualGame();
+  },2300);
+  scare.style.display="flex";
+}
+$("playButton").addEventListener("click",()=>{
+  if(started&&!running){beginScare();return}
+  if(!running)beginScare();
 });
+$("jumpscare").addEventListener("click",()=>{
+  // Jumpscaren går inte att hoppa över; spelet startar efter den korta effekten.
+});
+window.addEventListener("keydown",e=>{
+  if(["ArrowLeft","ArrowRight","ArrowUp"," "].includes(e.key))e.preventDefault();
+  keys[e.key]=true;
+  if(e.key===" "||e.key==="ArrowUp")jump();
+});
+window.addEventListener("keyup",e=>{keys[e.key]=false});
+function holdButton(id,key){
+  const b=$(id);
+  const on=e=>{e.preventDefault();keys[key]=true};
+  const off=e=>{e.preventDefault();keys[key]=false};
+  b.addEventListener("pointerdown",on);
+  ["pointerup","pointercancel","pointerleave"].forEach(ev=>b.addEventListener(ev,off));
+}
+holdButton("leftButton","ArrowLeft");
+holdButton("rightButton","ArrowRight");
+$("jumpButton").addEventListener("pointerdown",e=>{e.preventDefault();jump()});
+resetGame();drawScene();
 </script>
 </body>
 </html>
